@@ -151,6 +151,7 @@ module Database.Orville.PostgreSQL.Core
   , findRecordsBy
   , insertRecord
   , insertRecordMany
+  , insertRecordMultiRow
   , updateFields
   , updateRecord
   , sequenceNextVal
@@ -338,6 +339,26 @@ insertRecordMany tableDef newRecords = do
     executingSql InsertQuery insertSql $ do
       insert <- prepare conn insertSql
       executeMany insert (map (runToSql builder) newRecords)
+
+
+insertRecordMultiRow ::
+     MonadOrville conn m
+  => TableDefinition readEntity writeEntity key
+  -> [writeEntity]
+  -> m Integer 
+insertRecordMultiRow tableDef newRecords
+  | length newRecords <= 0 = error "must have 1 one or more record"
+  | otherwise = do 
+  let insertSql =
+        mkInsertMultiRowClause
+          (length newRecords)
+          (tableName tableDef)
+          (tableAssignableColumnNames tableDef)
+  let builder = tableToSql tableDef
+  withConnection $ \conn -> do
+    executingSql InsertQuery insertSql $ do
+      insert <- prepare conn insertSql
+      execute insert (concat $ map (runToSql builder) newRecords)
 
 deleteRecord ::
      MonadOrville conn m

@@ -15,6 +15,14 @@ mkInsertClause tblName columnNames =
     columns = List.intercalate "," $ columnNames
     placeholders = List.intercalate "," $ map (const "?") columnNames
 
+mkInsertMultiRowClause :: Int -> String -> [String] -> String
+mkInsertMultiRowClause numRows tblName columnNames =
+  "INSERT INTO " ++ escapedName tblName ++ " (" ++ columns ++ ") VALUES " ++
+  (concat . List.intercalate [", "] . take numRows . repeat $ placeholdersForSingleRow)
+  where
+    columns = List.intercalate "," $ columnNames
+    placeholdersForSingleRow =  ["(" ++ (List.intercalate "," $ map (const "?") columnNames) ++ ")"]
+
 mkUpdateClause :: String -> [String] -> String
 mkUpdateClause tblName columnNames =
   "UPDATE " ++ escapedName tblName ++ " SET " ++ placeholders
