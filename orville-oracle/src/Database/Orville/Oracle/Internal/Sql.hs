@@ -11,8 +11,12 @@ import Data.String.Helpers(escapeString)
 
 mkInsertClause :: String -> [String] -> String
 mkInsertClause tblName columnNames =
-  "INSERT INTO " ++
-  tblName ++ " (" ++ columns ++ ") VALUES (" ++ placeholders ++ ")"
+  case columnNames of
+    [] ->
+      "INSERT INTO " ++ tblName ++ "DEFAULT VALUES"
+    _ ->
+      "INSERT INTO " ++
+      tblName ++ " (" ++ columns ++ ") VALUES (" ++ placeholders ++ ")"
   where
     columns = List.intercalate "," $ columnNames
     placeholders = List.intercalate "," $ map (const "?") columnNames
