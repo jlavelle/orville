@@ -25,6 +25,8 @@ import qualified Data.Text.Encoding as Enc
 import qualified Data.Time as Time
 import qualified Database.HDBC as HDBC
 
+import Driver.HDBC
+
 {-|
   SqlType defines the mapping of a Haskell type (`a`) to a SQL column type in the
   database. This includes both how to convert the type to and from the raw values
@@ -51,7 +53,7 @@ data SqlType a = SqlType
     -- ^ 'sqlTypeSqlSize will be compared to the 'colSize' field found in the
     -- 'HDBC.SqlColDesc' return by 'describeTable' when determining whether
     -- a column type change is required when migrating the database.
-  , sqlTypeToSql :: a -> HDBC.SqlValue
+  , sqlTypeToSql :: a -> Value
     -- ^ A function for converting Haskell values of this type into values to
     -- be stored in the database.
   , sqlTypeFromSql :: HDBC.SqlValue -> Maybe a

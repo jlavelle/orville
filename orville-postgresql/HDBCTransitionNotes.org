@@ -1,0 +1,9 @@
+* Orville hdbc -> postgresql-simple
+** Stuff to take note of
+** A plan of attack [0/4]
+ - [ ] Create a "driver" layer that wraps all HDBC specific stuff
+ - [ ] Implement equivalent driver interface for postgresql-simple [0/1]
+   - [ ]
+ - [ ] Redefine SqlType to not depend on HDBC.SqlValue
+ - [ ]
+*** [ ] Remove all uses of SqlValue

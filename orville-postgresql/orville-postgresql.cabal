@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a2a6c4ca5530fd13151f967575140c08b0abd4567dae387712234047fffa2bdc
+-- hash: 5cf2498c5e239647582357df0b857a41cc949681a59de934127cea4a7dd22a8b
 
 name:           orville-postgresql
 version:        0.8.3.0
@@ -75,6 +75,9 @@ library
       Database.Orville.PostgreSQL.Internal.Trigger
       Database.Orville.PostgreSQL.Internal.Types
       Database.Orville.PostgreSQL.Internal.Where
+      Driver.HDBC
+      Driver.Interface.Value
+      Driver.PostgreSQLSimple
       Paths_orville_postgresql
   hs-source-dirs:
       src
@@ -84,6 +87,7 @@ library
       HDBC >=2.4
     , HDBC-postgresql >=2.3
     , base >=4.8 && <5
+    , binary >=0.8
     , bytestring
     , conduit >=1.2 && <1.4
     , containers >=0.5
@@ -93,6 +97,7 @@ library
     , lifted-base >=0.2
     , monad-control >=1.0
     , mtl >=2.2
+    , postgresql-simple >=0.6.2
     , profunctors >=5.2
     , resource-pool >=0.2
     , resourcet >=1.1
@@ -119,6 +124,7 @@ executable orville-sample-exe
       HDBC >=2.4
     , HDBC-postgresql >=2.3
     , base >=4.8 && <5
+    , binary >=0.8
     , bytestring
     , conduit >=1.2 && <1.4
     , containers >=0.5
@@ -129,6 +135,7 @@ executable orville-sample-exe
     , monad-control >=1.0
     , mtl >=2.2
     , orville-postgresql
+    , postgresql-simple >=0.6.2
     , profunctors >=5.2
     , resource-pool >=0.2
     , resourcet >=1.1
@@ -175,6 +182,7 @@ test-suite spec
       HDBC >=2.4
     , HDBC-postgresql >=2.3
     , base >=4.8 && <5
+    , binary >=0.8
     , bytestring
     , conduit >=1.2 && <1.4
     , containers >=0.5
@@ -185,6 +193,7 @@ test-suite spec
     , monad-control >=1.0
     , mtl >=2.2
     , orville-postgresql
+    , postgresql-simple >=0.6.2
     , profunctors >=5.2
     , resource-pool
     , resourcet >=1.1

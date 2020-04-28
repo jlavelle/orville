@@ -21,8 +21,8 @@ ghc-options:
 dependencies:
   - base >=4.8 && <5
   - bytestring
+  - binary >= 0.8
   - conduit >=1.2 && <1.4
-
   - containers >=0.5
   - convertible >=1.1
   - dlist >=0.7
@@ -32,6 +32,7 @@ dependencies:
   - HDBC >=2.4
   - HDBC-postgresql >=2.3
   - mtl >=2.2
+  - postgresql-simple >= 0.6.2
   - profunctors >= 5.2
   - resource-pool >=0.2
   - resourcet >= 1.1
