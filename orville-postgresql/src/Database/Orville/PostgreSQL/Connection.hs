@@ -27,4 +27,4 @@ createConnectionPool ::
   -> String -- ^ A PostgreSQL connection string
   -> IO (Pool Connection)
 createConnectionPool stripes linger maxRes connString =
-  createPool (connectPostgreSQL' connString) disconnect stripes linger maxRes
+  createPool (connectPostgreSQL' connString) (pure ()) stripes linger maxRes
