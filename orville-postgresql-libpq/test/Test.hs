@@ -1,5 +1,5 @@
-module Test
-  ( runVisualTests
+module Main
+  ( main
   ) where
 
 import Data.Pool (Pool)
@@ -33,9 +33,9 @@ import qualified Database.Orville.PostgreSQL.Internal.Expr as Expr
 {- The following are just the beginnings of tests that for now at least let us inspect manually
   if the sqltypes are in fact
 -}
-runVisualTests :: String -> String -> IO ()
-runVisualTests user pass = do
-  let connBStr = B8.pack $ "host=localhost user=" <> user <> " password=" <> pass
+main :: IO ()
+main = do
+  let connBStr = B8.pack $ "host=localhost user=orville_test password=orville"
   pool <- createConnectionPool 1 10 1 connBStr
 
 -- integer
