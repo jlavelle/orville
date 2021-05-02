@@ -6,11 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name:
-      - run:
           name: make sure dockerfile is built
           command: cd orville-postgresql-libpq && docker-compose build
       - run:
           name: run tests against ghc8.10.3 (stackage lts-17.0)
           command:
-            cd orville-postgresql-libpq && docker-compose run --rm dev stack --stack-yaml stack-lts-17.0.yml test --ghc-options=-j --flag orville-postgresql-libpq:ci
+            - cd orville-postgresql-libpq && docker-compose run --rm dev stack --stack-yaml stack-lts-17.0.yml test --ghc-options=-j --flag orville-postgresql-libpq:ci
