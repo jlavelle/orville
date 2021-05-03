@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  postgresql-96-and-ghc8103:
+  postgresql96andghc8103:
     machine:
       image: ubuntu-2004:202101-01
     steps:
@@ -12,7 +12,7 @@ jobs:
           name: run tests against ghc8.10.3 (stackage lts-17.0)
           command: cd orville-postgresql-libpq && docker-compose run --rm dev stack --stack-yaml stack-lts-17.0.yml test --ghc-options=-j --flag orville-postgresql-libpq:ci
 
-  postgresql-96-and-ghc865:
+  postgresql96andghc865:
     machine:
       image: ubuntu-2004:202101-01
     steps:
@@ -28,5 +28,5 @@ workflows:
   version: 2.0
   test:
     jobs:
-      - postgresql-96-and-ghc865
-      - postgresql-96-and-ghc8103
+      - postgresql96andghc865
+      - postgresql96andghc8103
