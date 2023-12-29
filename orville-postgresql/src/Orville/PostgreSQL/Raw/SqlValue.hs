@@ -47,6 +47,8 @@ module Orville.PostgreSQL.Raw.SqlValue
   , toLocalTime
   , fromRawBytes
   , fromRawBytesNullable
+  , unsafeFromRawBytes
+  , unsafeFromRawBytesNullable
   , toPgValue
   )
 where
@@ -134,6 +136,10 @@ fromRawBytes :: BS.ByteString -> SqlValue
 fromRawBytes =
   SqlValue . PgTextFormatValue.fromByteString
 
+unsafeFromRawBytes :: BS.ByteString -> SqlValue
+unsafeFromRawBytes =
+  SqlValue . PgTextFormatValue.unsafeFromByteString
+
 {- |
   Creates a 'SqlValue' from a raw bytestring. If 'Nothing' is specified as the
   input parameter then the resulting 'SqlValue' will represent a NULL value in
@@ -144,6 +150,10 @@ fromRawBytes =
 fromRawBytesNullable :: Maybe BS.ByteString -> SqlValue
 fromRawBytesNullable =
   maybe sqlNull fromRawBytes
+
+unsafeFromRawBytesNullable :: Maybe BS.ByteString -> SqlValue
+unsafeFromRawBytesNullable =
+  maybe sqlNull unsafeFromRawBytes
 
 {- |
   Encodes an 'Int8' value for use with the database.
